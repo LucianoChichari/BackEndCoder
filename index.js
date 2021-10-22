@@ -1,33 +1,24 @@
-const express = require('express');
-const { archivo } = require('./Archivos');
-const archivador = require('./Archivos')
-
+const express = require("express");
+const app = express();
+const cors = require("cors");
 const PORT = 8080;
-let app = express();
+const path = require("path")
+const serverRoutes = require("./routes/indexRoutes")
 
-app.get("/products", (req,res)=>{
-    let allprod = archivador.getAll();
-    res.status(200).send(allprod);
+app.use("/html", express.static(path.join(__dirname, "views")));
+
+app.use(cors("*"));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.get("/", (req, res)=> {
+    res.send(true)
 })
 
-
-app.get("/productsRandom", (req,res)=>{
-    let nrorandom = archivador.getByRandomId();
-    let productorandom = archivador.getById(nrorandom)
-    res.status(200).send(productorandom);
-})
-
-app.get("/",(req,res)=>{
-
-
-    res.status(200).send({message: 'Available'})
-})
-
-
+serverRoutes(app);
 
 app.listen(PORT, ()=>{
     console.log(`Connected to URL:: http://localhost:${PORT}`)
 });
 
-app.on("error", err => console.log(`Fallo de conexion al servidor`, err));
-//index
+app.on("error", err => console.log("Fallo de conexion al servidor", err));
