@@ -2,10 +2,20 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const PORT = 8080;
-const path = require("path")
-const serverRoutes = require("./routes/indexRoutes")
+const path = require("path");
+var exphbs = require('express-handlebars');
+const serverRoutes = require("./routes/indexRoutes");
 
-app.use("/html", express.static(path.join(__dirname, "views")));
+//app.set('views', './viewsPug');
+//app.set('view engine', 'pug');
+
+//app.set('views', path.join(__dirname, 'viewsHB'));
+//app.engine('handlebars', exphbs({defaultLayout: 'main' }));
+//app.set('view engine', 'handlebars');
+
+
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
 app.use(cors("*"));
 app.use(express.json());

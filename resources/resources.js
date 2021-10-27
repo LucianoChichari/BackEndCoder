@@ -16,7 +16,8 @@ class Contenedor {
             console.log(error)
         }
     }
-     getProdById(num) {
+
+    getProdById(num) {
         try {
             let data = this.getAll();
             let results = data.filter((x) => {
@@ -27,6 +28,7 @@ class Contenedor {
             console.log(error)
         }
     }
+
     newProd(objeto){
         try {
             let data = this.getAll();
@@ -46,6 +48,7 @@ class Contenedor {
         }
         
     }
+    
     deleteById(num){
         try {
             let data = this.getAll();
@@ -59,26 +62,27 @@ class Contenedor {
     updateProducto(data, num){
         
         try {
-            let {title, price, thumbnail} = data;
-            let response = this.getProdById(num)
+        let {title, price, thumbnail} = data;
+        let response = this.getProdById(num)
 
-            
-            response.map(num => {
-                if(num.title !== title){
-                    num.title = title
-                     if(num.price !== price){
-                        num.price = price
-                         if(num.thumbnail !== thumbnail){
-                            num.thumbnail = thumbnail
-                         }
-                     }
+        
+        response.map(num => {
+            if(num.title !== title){
+                num.title = title
+            if(num.price !== price){
+                num.price = price
+            if(num.thumbnail !== thumbnail){
+                num.thumbnail = thumbnail
                 }
-                return num
+                }
+                }
+            return num
             })
-            return response;
+
+        return response;
         
         } catch (error) {
-            console.log(error)
+        console.log(error)
         }
         
     }

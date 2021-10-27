@@ -1,0 +1,25 @@
+
+<% if(response.length > 0) {%>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Thumbnail</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% for (let productos of response) { %>
+        <tr>
+          <th scope="row"><%= productos.id %></th>
+          <td><%= productos.title %></td>
+          <td><%= productos.price %></td>
+          <td><%= productos.thumbnail %></td>
+        </tr>
+        <% } %>
+    </tbody>
+        </table>
+
+
+        <% } %>
