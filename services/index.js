@@ -2,13 +2,13 @@ const fs = require("fs")
 
 const productos = [{
     "id": 1,
-    "title": "preview",
+    "title": "producto 1",
     "price": 1,
-    "thumbnail": "img"
+    "thumbnail": "1"
 }]
 
 class Contenedor {
-    
+
     getAll() {
         try {
             return productos
@@ -16,20 +16,18 @@ class Contenedor {
             console.log(error)
         }
     }
-
-    getProdById(num) {
+     getProdById(e) {
         try {
             let data = this.getAll();
             let results = data.filter((x) => {
-                return x.id == num
+                return x.id == e
             })
             return results
         } catch (error) {
             console.log(error)
         }
     }
-
-    newProd(objeto){
+    newProd(obj){
         try {
             let data = this.getAll();
         let filterId = data.map((e) =>{
@@ -38,9 +36,9 @@ class Contenedor {
         let newId = filterId.length + 1;
         data.push({
             "id": newId,
-            "title": objeto.title,
-            "price": objeto.price,
-            "thumbnail": objeto.thumbnail
+            "title": obj.title,
+            "price": obj.price,
+            "thumbnail": obj.thumbnail
         })
         return data;
         } catch (error) {
@@ -48,44 +46,38 @@ class Contenedor {
         }
         
     }
-    
-    deleteById(num){
+    deleteById(e){
         try {
             let data = this.getAll();
-            data.splice(1, 1)
-            return data
+            let new_arr = data.filter((x) => {
+                return x.id !== e
+            })
+            return new_arr
         } catch (error) {
             console.log(error)
         }
     }
-
-    updateProducto(data, num){
-        
+    updateProduct(data, e){
         try {
-        let {title, price, thumbnail} = data;
-        let response = this.getProdById(num)
-
-        
-        response.map(num => {
-            if(num.title !== title){
-                num.title = title
-            if(num.price !== price){
-                num.price = price
-            if(num.thumbnail !== thumbnail){
-                num.thumbnail = thumbnail
+            let {title, price, thumbnail} = data
+            let response = this.getProdById(e);
+            let newObj = response.map(e => {
+                if(e.title !== title){
+                    e.title = title
+                    if(e.price !== price){
+                        e.price = price
+                        if(e.thumbnail !== thumbnail){
+                            e.thumbnail = thumbnail
+                        }
+                    }
                 }
-                }
-                }
-            return num
+                return e
             })
-
-        return response;
-        
-        } catch (error) {
+            return newObj
+    } catch (error){
         console.log(error)
-        }
-        
     }
+}
 }
 
 module.exports = new Contenedor()
