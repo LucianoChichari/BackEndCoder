@@ -1,18 +1,12 @@
-const {Router} = require("express");
-const router = Router();
-let contenedor = require("../services/index");
-let products = require("../products")
-let cart = require ("../cart")
+let products = require("../components/products");
+let carrito = require("../components/cart");
 
-function serverRouter(app) {
-    
+
+module.exports = (app) => {
     products(app)
-    cart(app)
-    
-    app.get("/", (req, res) =>{
-    res.send(true)
+    carrito(app)
+
+    app.get("/", (req, res, next) => {
+        res.send("Alo")
     })
-
 }
-
-module.exports = serverRouter;

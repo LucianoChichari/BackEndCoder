@@ -3,8 +3,23 @@ const fs = require("fs")
 const productos = [{
     "id": 1,
     "title": "producto 1",
-    "price": 1,
-    "thumbnail": "1"
+    "price": 20,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+}, {
+    "id": 2,
+    "title": "producto 3",
+    "price": 10,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+}, {
+    "id": 3,
+    "title": "producto 4",
+    "price": 23,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+}, {
+    "id": 4,
+    "title": "producto 5",
+    "price": 30,
+    "thumbnail": "https://cdn1.iconfinder.com/data/icons/feather-2/24/scissors-512.png"
 }]
 
 class Contenedor {
@@ -63,13 +78,13 @@ class Contenedor {
             let response = this.getProdById(e);
             let newObj = response.map(e => {
                 if(e.title !== title){
-                    e.title = title
-                    if(e.price !== price){
-                        e.price = price
-                        if(e.thumbnail !== thumbnail){
-                            e.thumbnail = thumbnail
-                        }
-                    }
+                     e.title = title
+                     if(e.price !== price){
+                         e.price = price
+                         if(e.thumbnail !== thumbnail){
+                             e.thumbnail = thumbnail
+                         }
+                     }
                 }
                 return e
             })

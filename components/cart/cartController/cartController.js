@@ -1,35 +1,33 @@
-const e = require("express");
 const fs = require("fs")
 
-const carritos = [
-    {
+
+const cart_arr = [{
     "id": 1,
-    "productosCart": [
-        { "id": 1,
+    "cartProducts": [
+       { "id": 1,
         "timestamp": Date.now(),
-        "nombre": "nombre",
-        "descripcion": "descripcion",
-        "codigo": "codigo",
+        "name": "name",
+        "description": "description",
+        "code": "code",
         "url": "url",
-        "precio": "precio",
+        "price": "price",
         "stock": "stock"}
     ]
-    }
-]
+}];
 
-class ContenedorCarrito {
+class CartController {
 
     getAll() {
         try {
-            return carritos
+            return cart_arr
         } catch (error) {
             console.log(error)
         }
     }
-
-    getCartById(e) {
+     getCartById(e) {
         try {
             let data = this.getAll();
+            console.log(data)
             let results = data.filter((x) => {
                 return x.id == e
             })
@@ -38,23 +36,22 @@ class ContenedorCarrito {
             console.log(error)
         }
     }
-
     newProductInCart(obj, num){
         try {
             let data = this.getCartById(num);
             console.log(data)
-        let filterId = data[0].productosCart.map((e) =>{
+        let filterId = data[0].cartProducts.map((e) =>{
             return e.id
         });
         let newId = filterId.length + 1;
-        data[0].productosCart.push({
+        data[0].cartProducts.push({
                 "id": newId,
                 "timestamp": Date.now(),
-                "nombre": obj.name,
-                "descripcion": obj.description,
-                "codigo": obj.code,
+                "name": obj.name,
+                "description": obj.description,
+                "code": obj.code,
                 "url": obj.url,
-                "precio": obj.price,
+                "price": obj.price,
                 "stock": obj.stock
         })
         return data;
@@ -62,7 +59,6 @@ class ContenedorCarrito {
             console.log(error)
         }
     }
-
     newCart(){
         try {
             let data = this.getAll();
@@ -72,27 +68,13 @@ class ContenedorCarrito {
         let newId = filterId.length + 1;
         data.push({
             "id": newId,
-            "productosCart": []
+            "cartProducts": []
         })
         return data;
         } catch (error) {
             console.log(error)
         }
-        
-    }
-
-    deleteProductById(a, b){
-        try {
-            let data = this.getCartById(a);
-            let new_arr = data[0].productosCart.filter((x) => {
-                return x.id !== b
-            })
-            return new_arr
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+    }    
     deleteById(e){
         try {
             let data = this.getAll();
@@ -104,7 +86,17 @@ class ContenedorCarrito {
             console.log(error)
         }
     }
-    
+    deleteProductById(a, b){
+        try {
+            let data = this.getCartById(a);
+            let new_arr = data[0].cartProducts.filter((x) => {
+                return x.id !== b
+            })
+            return new_arr
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
-module.exports = new ContenedorCarrito()
+module.exports = new CartController()
